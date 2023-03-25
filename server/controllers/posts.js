@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 
 
 const getPosts= async (req,res)=>{
+    
     const { page } = req.query;
     try {
         const LIMIT = 6;
@@ -144,5 +145,15 @@ const commentPost = async (req, res) => {
     res.json(updatedPost);
 };
 
+const getPostsByUserId = async(req,res) =>{
+    
+    const { userid } = req.query;
+   
 
-module.exports = {getPosts,createPost,updatePost,deletePost,likePost,getPostsBySearch,getPost , commentPost};
+    const posts = await postMessage.find({creator : userid});
+
+    res.json({ data: posts });
+}
+
+
+module.exports = {getPosts,createPost,updatePost,deletePost,likePost,getPostsBySearch,getPost , commentPost , getPostsByUserId};

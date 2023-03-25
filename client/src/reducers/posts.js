@@ -31,9 +31,16 @@ export default (state = [],action)=>{
       return { ...state, posts: state.posts.filter((post) => post._id !== action.payload) };
     case 'FETCH_POST':
       return  { ...state, post: action.payload };
+    case 'FETCH_USERS':
+      return {...state , users : action.payload.data.data}; 
+    case 'FETCH_USER':
+      return{...state , user : action.payload} 
+    case 'POSTS_BY_USER':
+      return{...state , posts : action.payload.data.data};  
     default:
       return state;
      
         
     }
+    
 }

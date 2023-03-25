@@ -53,4 +53,13 @@ export default makeStyles({
     display: 'block',
     textAlign: 'initial',
   },
+  message:{
+    whiteSpace:'nowrap',
+    overflow:'hidden',
+    // white-space: nowrap;
+  // overflow: hidden;
+    textOverflow:'ellipsis',
+    height:'50px',
+    
+  }
 });

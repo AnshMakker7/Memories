@@ -47,5 +47,42 @@ const signin = async (req, res) => {
     }
   };
 
+  const getUsers = async(req,res) =>{
+    
+    const {search} = req.query;
+    
+    
+    try {
+        
+       const userPattern =  new RegExp("^"+search)
 
-module.exports = {signin , signup}
+       const users = await User.find({email:{$regex:userPattern}});
+       
+        
+       res.json({ data: users });
+    } catch (e) {
+        res.status(404).json({ message: e.message });
+    }
+    
+  }
+
+  const getUser = async(req,res) =>{
+    
+    const {id} = req.params;
+    
+    
+    try {
+        
+       
+
+      const user = await User.findById(id);
+       
+        
+      res.status(200).json(user);
+    } catch (e) {
+        res.status(404).json({ message: e.message });
+    }
+    
+  }
+
+module.exports = {signin , signup , getUsers , getUser}

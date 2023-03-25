@@ -10,7 +10,7 @@ import useStyles from './styles';
 
 
 const PostDetails = () => {
-  const { post, posts } = useSelector((state) => state.posts);
+  const { post } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const classes = useStyles();
@@ -28,7 +28,7 @@ const PostDetails = () => {
   
   
 
- console.log(post)
+//  console.log(post)
   
   
   

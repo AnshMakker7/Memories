@@ -24,3 +24,23 @@ export const signup =(formData , navigate)=> async(dispatch)=>{
         console.log(error);
     }
 }
+
+export const searchUser= (search) => async(dispatch)=>{
+    try {
+        const {data} = await api.getUsersBySearch(search);
+        dispatch({type : 'FETCH_USERS' , payload :{data}});
+        
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export const getUser = (id) => async(dispatch)=>{
+    try {
+        const {data} = await api.getUserById(id);
+        dispatch({ type: 'FETCH_USER', payload: data });
+        
+    } catch (err) {
+        console.log(err);
+    }
+}
