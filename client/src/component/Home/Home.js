@@ -2,7 +2,7 @@ import React ,{useEffect , useState} from 'react'
 import { Container, Grow, Grid, Paper , AppBar , TextField , Button} from '@material-ui/core';
 import Posts from '../Posts/Posts';
 import Form from '../Form/Form';
-import { useDispatch } from 'react-redux';
+import { useDispatch ,useSelector} from 'react-redux';
 import Pagination from '../pagination'
 import {getPosts, getPostsBySearch} from '../../actions/posts'
 import { useNavigate , useLocation } from 'react-router';
@@ -28,6 +28,11 @@ const Home = () => {
     const [tags , setTags] = useState([])
     const handleAdd =(tag)=> setTags([...tags , tag]);
     const handleDelete = (tagToDelete) => setTags(tags.filter((tag) => tag !== tagToDelete));
+    const { posts } = useSelector((state)=>state.posts);
+    
+    useEffect(() => {
+    
+    }, [posts])
     
 
     const searchPost =()=>{

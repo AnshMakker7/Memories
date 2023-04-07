@@ -85,4 +85,111 @@ const signin = async (req, res) => {
     
   }
 
-module.exports = {signin , signup , getUsers , getUser}
+  const followedUser = async(req,res) =>{
+    const {id} = req.params;
+
+    if(!req.userId) return res.json({message : 'Unauthenticated'})
+    
+   
+    const user = await User.findById(id);
+    // const user1 = await User.findById( String(req.userId))
+
+    const index = user.followers.findIndex((id) => id ===  String(req.userId));
+    // const index1 = user1.following.findIndex((id1) => id1 === id);
+    
+    if (index ===-1) {
+         if(index===-1){
+        user.followers.push(req.userId); 
+         }
+        // if(index1===-1){
+        //   user1.following.push(id);
+        // }
+       
+      } else {
+        user.followers = user.followers.filter((id) => id !==  String(req.userId));
+        // user1.following = user1.following.filter((id1) => id1 !== id);
+      }
+
+    const updatedFollowed = await User.findByIdAndUpdate(id, user, { new: true });
+    // const updatedFollowing = await User.findByIdAndUpdate( String(req.userId), user1, { new: true }); 
+
+    
+    res.json(updatedFollowed);
+    
+  }
+
+  const followingUser = async(req,res) =>{
+    const {id} = req.params;
+   
+    if(!req.userId) return res.json({message : 'Unauthenticated'})
+    
+   
+    const user = await User.findById(req.userId);
+   
+    // const user1 = await User.findById( String(req.userId))
+
+    const index = user.following.findIndex((id1) => id1 === String(id));
+    // const index1 = user1.following.findIndex((id1) => id1 === id);
+    
+    if (index ===-1) {
+         if(index===-1){
+        user.following.push(id); 
+         }
+        // if(index1===-1){
+        //   user1.following.push(id);
+        // }
+       
+      } else {
+        user.following = user.following.filter((id1) => id1 !== String(id));  
+        // user1.following = user1.following.filter((id1) => id1 !== id);
+      }
+
+    const updatedFollowing = await User.findByIdAndUpdate(req.userId, user, { new: true });
+    // const updatedFollowing = await User.findByIdAndUpdate( String(req.userId), user1, { new: true }); 
+    console.log(updatedFollowing)
+
+    
+    res.json(updatedFollowing);
+    
+  }
+
+  const message_to = async(req,res) =>{
+    
+    const {value} = req.body;
+    const {id} = req.params;
+    
+    const user = await User.findById(id);
+   
+    const obj = user.message.find(o => o.id === req.userId);
+    
+    if(!obj) user.message.push({id:req.userId , chat:[value]})
+    else obj.chat.push(value)
+
+    const message_to = await User.findByIdAndUpdate(id, user, { new: true });
+    // console.log(message_to)
+   
+    res.json(message_to);
+    
+  }
+
+  const message_from = async(req,res) =>{
+    
+    const {value} = req.body;
+    
+    const {id} = req.params;
+    
+    const user = await User.findById(req.userId);
+   
+    const obj = user.message.find(o => o.id === id);
+    if(!obj) user.message.push({id:id , chat:[value]})
+    else obj.chat.push(value)
+   
+    
+    const message_from = await User.findByIdAndUpdate(req.userId, user, { new: true });
+
+    res.json(message_from);
+    
+  }
+
+
+module.exports = {signin , signup , getUsers , getUser , followedUser,followingUser , message_to , message_from}

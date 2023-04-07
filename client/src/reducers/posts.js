@@ -37,6 +37,14 @@ export default (state = [],action)=>{
       return{...state , user : action.payload} 
     case 'POSTS_BY_USER':
       return{...state , posts : action.payload.data.data};  
+    case 'FOLLOWED' : 
+      return { ...state, user : action.payload}
+    case 'FOLLOWING' : 
+      return { ...state, user1 : action.payload}
+    case 'RECIEVER' :
+      return {...state , user_id : action.payload}
+    case 'RECIEVER' :
+      return {...state , user_recieved : action.payload}  
     default:
       return state;
      

@@ -44,3 +44,71 @@ export const getUser = (id) => async(dispatch)=>{
         console.log(err);
     }
 }
+
+// export const followingUser = (id) => async(dispatch)=>{
+
+//     try {
+//         const data = await api.followingUser(id);
+
+//     } catch (error) {
+        
+//     }
+
+
+// }
+
+export const followedUser = (id) => async(dispatch)=>{
+
+    try {
+        const {data} = await api.followedUser(id);
+        dispatch({type : 'FOLLOWED' , payload :data});
+
+    } catch (error) {
+        
+    }
+
+
+}
+
+export const followingUser = (id) => async(dispatch)=>{
+
+    try {
+        const {data} = await api.followingUser(id);
+
+        dispatch({type : 'FOLLOWING' , payload :data});
+
+    } catch (error) {
+        
+    }
+
+
+}
+
+export const message_to = (value,id) => async(dispatch)=>{
+
+    try {
+        
+        const {data} = await api.message_to(value,id);
+        dispatch({type : 'RECIEVER' , payload :data});
+        
+
+    } catch (error) {
+        
+    }
+
+
+}
+
+export const message_from = (value,id) => async(dispatch)=>{
+
+    try {
+        const {data} = await api.message_from(value,id);
+        dispatch({type : 'SENDER' , payload :data});
+        
+
+    } catch (error) {
+        
+    }
+
+
+}

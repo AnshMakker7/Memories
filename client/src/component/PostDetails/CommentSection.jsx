@@ -12,7 +12,13 @@ const CommentSection = ({ post }) => {
   const [comments, setComments] = useState(post?.comments);
   const classes = useStyles();
   const commentsRef = useRef();
-//   console.log(post)
+
+  
+  
+useEffect(() => {
+  
+}, [post])
+
 
   const handleComment = async () => {
     const newComments = await dispatch(commentPost(`${user?.result?.name}: ${comment}`, post._id));
@@ -31,7 +37,7 @@ const CommentSection = ({ post }) => {
       <div className={classes.commentsOuterContainer}>
         <div className={classes.commentsInnerContainer}>
           <Typography gutterBottom variant="h6">Comments</Typography>
-          {comments.map((c, i) => (
+          {comments?.map((c, i) => (
             <Typography key={i} gutterBottom variant="subtitle1">
               <strong>{c.split(': ')[0]} : </strong>
               {c.split(':')[1]}

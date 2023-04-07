@@ -5,6 +5,15 @@ const userSchema = mongoose.Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
   id: { type: String },
+  following : {type : [String]},
+  followers : {type : [String]},
+  message:[{
+    
+      id:{type:String},
+      chat:[{type:String}]
+    
+    
+}]
 });
 
 module.exports = mongoose.model('User', userSchema);

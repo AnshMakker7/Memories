@@ -20,5 +20,16 @@ export default makeStyles((theme) => ({
   posts:{
     marginBottom:'15px'
     
+  },
+  section:{
+    width:'1000px',
+    alignContent:'center',
+  },
+  follow :{
+    backgroundColor:'white',
+  },
+  
+  message :{
+    backgroundColor:'white',
   }
 }));
