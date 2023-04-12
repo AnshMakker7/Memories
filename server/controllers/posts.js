@@ -1,10 +1,11 @@
-const postMessage = require('../models/postMessage.js')
-const express = require('express');
-const mongoose = require('mongoose');
+import express from 'express';
+import mongoose from 'mongoose';
+
+import postMessage from '../models/postMessage.js';
 
 
 
-const getPosts= async (req,res)=>{
+export const getPosts= async (req,res)=>{
     
     const { page } = req.query;
     try {
@@ -20,7 +21,7 @@ const getPosts= async (req,res)=>{
     }
 }
 
-const getPost = async (req, res) => { 
+export const getPost = async (req, res) => { 
     const { id } = req.params;
     
     try {
@@ -33,7 +34,7 @@ const getPost = async (req, res) => {
 }
 
 
-const getPostsBySearch= async (req,res)=>{
+export const getPostsBySearch= async (req,res)=>{
     
     const {searchQuery , tags} = req.query;
     
@@ -50,7 +51,7 @@ const getPostsBySearch= async (req,res)=>{
     }
 }
 
-const createPost= async (req,res)=>{
+export const createPost= async (req,res)=>{
     const post = req.body;
 
     const newPostMessage = new postMessage({...post , creator : req.userId , createdAt : new Date().toISOString() })
@@ -63,7 +64,7 @@ const createPost= async (req,res)=>{
     }
 }
 
-const updatePost = async (req,res)=>{
+export const updatePost = async (req,res)=>{
     // const {id : _id} = req.params;
     // const post = req.body;
 
@@ -87,7 +88,7 @@ const updatePost = async (req,res)=>{
     res.json(updatedPost);
 }
 
-const deletePost = async (req,res)=>{
+export const deletePost = async (req,res)=>{
     
     const { id } = req.params;
     
@@ -103,7 +104,7 @@ const deletePost = async (req,res)=>{
 }
 
 
-const likePost = async (req,res)=>{
+export const likePost = async (req,res)=>{
     
     const  {id}  = req.params;
     
@@ -132,7 +133,7 @@ const likePost = async (req,res)=>{
     res.json(updatedPost);
 }
 
-const commentPost = async (req, res) => {
+export const commentPost = async (req, res) => {
     const { id } = req.params;
     const { value } = req.body;
 
@@ -145,7 +146,7 @@ const commentPost = async (req, res) => {
     res.json(updatedPost);
 };
 
-const getPostsByUserId = async(req,res) =>{
+export const getPostsByUserId = async(req,res) =>{
     
     const { userid } = req.query;
    
@@ -156,4 +157,3 @@ const getPostsByUserId = async(req,res) =>{
 }
 
 
-module.exports = {getPosts,createPost,updatePost,deletePost,likePost,getPostsBySearch,getPost , commentPost , getPostsByUserId};

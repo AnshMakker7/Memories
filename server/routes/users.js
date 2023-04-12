@@ -1,7 +1,7 @@
-const express = require('express');
-const {signin , signup , getUsers, getUser , followingUser , followedUser , message_to , message_from} = require('../controllers/users')
+import express from 'express'
+import {signin , signup , getUsers, getUser , followingUser , followedUser , message_to , message_from} from'../controllers/users.js'
 const router = express.Router();
-const {auth} = require('../middleware/auth')
+import auth from'../middleware/auth.js'
 
 router.post('/signin',signin);
 router.post('/signup',signup);
@@ -12,6 +12,6 @@ router.patch('/:id/followedUser',auth, followedUser);
 router.patch('/:id/message_to',auth,message_to );
 router.patch('/:id/message_from',auth,message_from );
 
-module.exports = router
+export default router;
 
 

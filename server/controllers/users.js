@@ -1,9 +1,9 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
-const User = require('../models/user')
+import User from "../models/user.js";
 
-const signin = async (req, res) => {
+export const signin = async (req, res) => {
     const { email, password } = req.body;
   
     try {
@@ -25,7 +25,7 @@ const signin = async (req, res) => {
     }
   };
 
-  const signup = async (req, res) => {
+  export const signup = async (req, res) => {
     const { email, password, firstName, lastName } = req.body;
     
     try {
@@ -47,7 +47,7 @@ const signin = async (req, res) => {
     }
   };
 
-  const getUsers = async(req,res) =>{
+  export const getUsers = async(req,res) =>{
     
     const {search} = req.query;
     
@@ -66,7 +66,7 @@ const signin = async (req, res) => {
     
   }
 
-  const getUser = async(req,res) =>{
+  export const getUser = async(req,res) =>{
     
     const {id} = req.params;
     
@@ -85,7 +85,7 @@ const signin = async (req, res) => {
     
   }
 
-  const followedUser = async(req,res) =>{
+  export const followedUser = async(req,res) =>{
     const {id} = req.params;
 
     if(!req.userId) return res.json({message : 'Unauthenticated'})
@@ -118,7 +118,7 @@ const signin = async (req, res) => {
     
   }
 
-  const followingUser = async(req,res) =>{
+  export const followingUser = async(req,res) =>{
     const {id} = req.params;
    
     if(!req.userId) return res.json({message : 'Unauthenticated'})
@@ -153,7 +153,7 @@ const signin = async (req, res) => {
     
   }
 
-  const message_to = async(req,res) =>{
+  export const message_to = async(req,res) =>{
     
     const {value} = req.body;
     const {id} = req.params;
@@ -172,7 +172,7 @@ const signin = async (req, res) => {
     
   }
 
-  const message_from = async(req,res) =>{
+  export const message_from = async(req,res) =>{
     
     const {value} = req.body;
     
@@ -192,4 +192,3 @@ const signin = async (req, res) => {
   }
 
 
-module.exports = {signin , signup , getUsers , getUser , followedUser,followingUser , message_to , message_from}
